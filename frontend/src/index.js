@@ -7,14 +7,19 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "./components/Elements/Toast";
+import { Helmet } from "react-helmet";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>Blog App</title>
+    </Helmet>
     <Provider store={store}>
       <App />
     </Provider>
-    <Toast/>
+    <Toast />
   </React.StrictMode>
 );
 

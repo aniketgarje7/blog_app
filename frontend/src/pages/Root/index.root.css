@@ -144,6 +144,9 @@
 .search_bar::-webkit-scrollbar {
   width: 0px;
 }
+.search_bar{
+  overflow-y: scroll;
+}
 /* media querys */
 @media (min-width: 768px) {
   .blog_bar {
