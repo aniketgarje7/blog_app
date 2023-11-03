@@ -6,11 +6,11 @@ const blogRoutes = require('./routes/blog.js');
 
 const app = express();
 const PORT = process.env.PORT;
-
+const CORS = process.env.CORS_URL
 // cors
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: CORS
 }));
 
 // mongodb connection
