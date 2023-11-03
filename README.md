@@ -1,7 +1,7 @@
 # Blog App
 
 <p align="center">
-  <img src="assets/blogDemo.png" alt="demo" />
+  <img src="frontend/public/blogDemo.png" alt="demo" />
 </p
 
 Here you can create Your Blogs and read blogs created by other users. 
