@@ -7,17 +7,11 @@ export const blogService = {
     deleteBlog,
     likeBlog,
 };
-const token = localStorage.getItem('ba_token');
-const header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "x-blog":`${token}`
-}
 
 async function createBlog(data){
     const requestOptions = {
         method: "POST",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/create`, requestOptions)
@@ -48,7 +42,7 @@ async function getBlogs(data){
 async function editBlog(data){
     const requestOptions = {
         method: "PUT",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/update-blog`, requestOptions)
@@ -64,7 +58,7 @@ async function editBlog(data){
 async function deleteBlog(data){
     const requestOptions = {
         method: "DELETE",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/delete-blog`, requestOptions)
@@ -80,7 +74,7 @@ async function deleteBlog(data){
 async function likeBlog(data){
     const requestOptions = {
         method: "PUT",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/like`, requestOptions)

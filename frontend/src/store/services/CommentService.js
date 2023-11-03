@@ -1,19 +1,15 @@
+import { AuthHeader } from "../headers/authHeader";
+
 export const CommentService = {
    createComment,
    getComments,
    likeComment
 };
-const token = localStorage.getItem('ba_token');
-const header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "x-blog":`${token}`
-}
 
 async function createComment(data){
     const requestOptions = {
         method: "POST",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/comment`, requestOptions)
@@ -29,7 +25,7 @@ async function createComment(data){
 async function getComments(data){
     const requestOptions = {
         method: "GET",
-        headers: header,
+        headers: AuthHeader(),
     };
     return fetch(`${process.env.REACT_APP_API}blog/comments/${data.blogId}?page=${data.page}`, requestOptions)
         .then((res)=>res.json())
@@ -44,7 +40,7 @@ async function getComments(data){
 async function likeComment(data){
     const requestOptions = {
         method: "PUT",
-        headers: header,
+        headers: AuthHeader(),
         body: JSON.stringify(data),
     };
     return fetch(`${process.env.REACT_APP_API}blog/comment/like`, requestOptions)
