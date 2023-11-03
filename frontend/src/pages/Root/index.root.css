@@ -1,0 +1,158 @@
+.root_page {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  height: 100dvh;
+  min-height: 400px;
+}
+/* black theme */
+.root_bg {
+  background-color: var(--dark_three);
+  color: var(--blog_five);
+}
+.card {
+  background-color: var(--blog_two) !important ;
+  color: var(--blog_five) !important;
+}
+.list-group-item {
+  background-color: var(--blog_two) !important ;
+  color: var(--blog_five) !important;
+}
+.offcanvas-md {
+  background-color: var(--dark_three);
+  color: var(--blog_five);
+}
+/* css */
+.blog_bar {
+  width: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+}
+.blog_bar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+.username_card {
+  margin: 0px 11px;
+  opacity: 0.6;
+}
+
+.blog_create {
+  border-bottom: 1px solid;
+}
+.menubar_footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  padding: 10px 10px;
+}
+.menu_bar {
+  height: inherit;
+  max-width: 200px;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+.menubar_wrap {
+  height: inherit;
+}
+.menubar_items {
+  list-style: none;
+}
+.menubar_items li {
+  padding: 10px 0px !important;
+}
+.offcanvas_menubar {
+  padding: 10px 10px !important;
+}
+.offcanvas-md.offcanvas-start {
+  max-width: 280px;
+}
+.menubar_logo_image {
+  border-radius: 10px;
+}
+.menubar_icons {
+  font-size: 21px;
+  padding-right: 8px;
+  cursor: pointer;
+}
+.searchbar {
+  padding: 10px 0px;
+}
+.searchbar_input_group {
+  border-radius: 19px;
+  border: 1px solid;
+  overflow: hidden;
+}
+
+.searchbar_form_input:focus {
+  outline: 0px;
+  border: none !important;
+  box-shadow: none !important;
+}
+.searchbar_form_input {
+  outline: 0px;
+  border: none !important;
+  box-shadow: none !important;
+}
+.follow_button {
+  float: right;
+  font-size: 11px !important;
+}
+.button_loader {
+  text-align: center;
+}
+.card_icons {
+  padding: 0px 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.card_footer {
+  padding: 4px 10px !important;
+}
+.see_comment_button {
+  text-align: center;
+  background-color: var(--dark_one);
+  border-radius: 5px;
+  color: var(--dark_five);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.see_comment_button:hover {
+  background-color: var(--blog_five);
+  color: var(--dark_five);
+  transition: 0.3s;
+}
+.green_icon {
+  color: green;
+}
+.danger_icon {
+  color: red;
+}
+.comment_bar {
+  width: 88%;
+  margin-left: auto;
+}
+.card-body {
+  padding: 0rem 1rem !important;
+}
+.no_data {
+  padding-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.search_bar::-webkit-scrollbar {
+  width: 0px;
+}
+/* media querys */
+@media (min-width: 768px) {
+  .blog_bar {
+    width: 50%;
+  }
+  .menu_bar {
+    width: 30%;
+  }
+}
+
+@media (min-width: 576px) {
+}

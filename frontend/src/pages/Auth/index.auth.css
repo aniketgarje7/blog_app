@@ -1,0 +1,62 @@
+.sign_in_and_up {
+  width: 100%;
+  max-width: 500px;
+}
+.auth_divide {
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  min-height: 100dvh;
+}
+.auth_page {
+  background-color: var(--blog_two);
+  min-height: 100dvh;
+}
+.heading_auth {
+  color: var(--blog_five);
+}
+.error_message {
+  color: var(--blog_one);
+}
+.error_component {
+  margin: 10px 0px;
+  text-align: center;
+  background: var(--blog_three);
+  border-radius: 3px;
+}
+.success_message {
+  color: #5cb85c;
+}
+.success_component {
+  margin: 10px 0px;
+  text-align: center;
+  background: var(--blog_three);
+  border-radius: 3px;
+}
+/* breakpoints */
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .sign_in_and_up {
+    padding: 40px;
+    box-shadow: var(--blog_five) 0px 1px 2px 0px;
+  }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .sign_in_and_up {
+    width: 50%;
+  }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+}
