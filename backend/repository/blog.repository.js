@@ -22,9 +22,11 @@ const saveToDB = async (title, text, userId) => {
 const fetchBlogs = async (page, LIMIT) => {
   try {
     const data = await Blog.find({})
+      .sort({created_at:-1})
       .populate({ path: "userId", select: ["name", "username"] })
       .skip(page * LIMIT)
       .limit(LIMIT);
+      
     return { data: data, error: null };
   } catch (error) {
     console.log("fetchBlogs error", error);

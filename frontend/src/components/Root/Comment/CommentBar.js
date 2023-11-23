@@ -13,6 +13,7 @@ const CommentBar = ({ blogId, cLength, setCLength }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const isNoCommentData = useRef(false);
   const comments = useSelector(selectData);
+  const [blogComments,setBlogComments] = useState([]);
   const dispatch = useDispatch();
 
   const handleComments = () => {
@@ -40,7 +41,14 @@ const CommentBar = ({ blogId, cLength, setCLength }) => {
         isNoCommentData.current = true;
       }
     });
-  }
+  };
+  useEffect(()=>{
+    if(comments.length===0){
+      return;
+    }
+    setBlogComments([...comments.filter((comment)=>comment.blogId.toString()===blogId.toString())]);
+  },[comments]);
+  
   return (
     <div className="comment_bar">
       <div>
@@ -59,7 +67,7 @@ const CommentBar = ({ blogId, cLength, setCLength }) => {
         {seeComments && (
           <div>
             {" "}
-            {comments.map((comment, key) => (
+            {blogComments.map((comment, key) => (
               <div key={key}>
                 <CommentCard comment={comment} />
               </div>

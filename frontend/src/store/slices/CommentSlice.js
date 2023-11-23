@@ -11,7 +11,14 @@ export const commentSlice = createSlice({
     },
     reducers:{
         setData:(state,action)=>{
-            state.data = [...state.data,...action.payload];
+            const data = action.payload.filter((comment)=>{
+                const commentsId = state.data.map((c)=>c._id);
+                if(commentsId.includes(comment._id)){
+                    return false;
+                }
+                return true;
+            })
+            state.data = [...state.data,...data];
         },
         unSetData:(state,action)=>{
             state.data = [];
