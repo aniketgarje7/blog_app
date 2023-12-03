@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignIn from "../../components/Auth/SignIn";
 import SignUp from "../../components/Auth/SignUp";
 import image from "../../assets/hashImage2.png";
 import "./index.auth.css";
-import { useSelector } from "react-redux";
-import { selectError, selectSuccess } from "../../store/slices/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectError, selectSuccess, setError, setSuccess } from "../../store/slices/AuthSlice";
 import Error from "../../components/Auth/Error";
 import Success from "../../components/Auth/Success";
 
@@ -12,7 +12,11 @@ const Auth = () => {
   const [authToggle, setAuthToggle] = useState("login");
   const error = useSelector(selectError);
   const success = useSelector(selectSuccess);
-
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(setSuccess(null));
+    dispatch(setError(null));
+  },[authToggle])
   return (
     <div className="auth_page">
       <div className="container auth_divide">
