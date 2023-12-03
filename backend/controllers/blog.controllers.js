@@ -4,7 +4,7 @@ const { saveToDB, fetchBlogs, fetchBlogById, updateBlogById, deleteBlogById, lik
 const createBlog = async (req, res) => {
   const schema = Joi.object({
     title: Joi.string().required().max(50),
-    text: Joi.string().required().min(30).max(1000),
+    text: Joi.string().required().min(20).max(1000),
   });
   const isValid = schema.validate(req.body);
   if (isValid.error) {
