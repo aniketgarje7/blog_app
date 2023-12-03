@@ -33,7 +33,7 @@ const userSlice = createSlice({
     }
 });
 
-const {setSearchData,setError,setSuccess,setWhoToFollowData} = userSlice.actions;
+export const {setSearchData,setError,setSuccess,setWhoToFollowData} = userSlice.actions;
 
 export const getUsersByQuery = (payload) => (dispatch) => {
     return authService.getUsersByQuery(payload).then((response) => {

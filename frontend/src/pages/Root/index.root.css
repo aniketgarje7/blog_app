@@ -147,6 +147,9 @@
 .search_bar{
   overflow-y: scroll;
 }
+.no_user{
+  padding: 2px 12px;
+}
 /* media querys */
 @media (min-width: 768px) {
   .blog_bar {

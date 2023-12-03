@@ -95,12 +95,13 @@ body {
   margin-left: 0px;
 }
 
-.d-none {
-  transition: 0.5s;
-  display: none;
+.visible_none {
+  /* visibility: hidden; */
+  max-height: 0px;
+  transition:0.5s;
 }
-.show {
-  display: block;
-  transform: ease-in-out;
-  transition-duration: 5000ms;
+.visible_show {
+  /* visibility: visible; */
+  max-height: 50vh;
+  transition: 0.5s;
 }
