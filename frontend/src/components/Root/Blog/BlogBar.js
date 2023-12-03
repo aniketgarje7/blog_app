@@ -4,8 +4,9 @@ import Tabs from "react-bootstrap/Tabs";
 import BlogRAndC from "./BlogRAndC";
 import MenuBar from "../Menu/MenuBar";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs, selectIsNoData } from "../../../store/slices/BlogSlice";
+import { getBlogs, selectIsNoData,selectData} from "../../../store/slices/BlogSlice";
 import ButtonLoader from "../../Elements/ButtonLoader";
+import { selectUser } from "../../../store/slices/AuthSlice";
 
 const BlogBar = ({ element }) => {
   const userCall = useRef(true);
@@ -13,8 +14,10 @@ const BlogBar = ({ element }) => {
   const pageNumber = useRef(0);
   const didApiCall = useRef(false);
   const isNoData = useSelector(selectIsNoData);
+  const blogs = useSelector(selectData);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
+ 
   // getBlogsFunction
   const fetchblogs = (pageNumber)=>{
     if(isNoData){
@@ -61,6 +64,16 @@ const BlogBar = ({ element }) => {
       element.removeEventListener("scroll", handleScroll);
     };
   }, [element,isNoData]);
+
+  const filterFollowingBlogs = ()=>{
+    if(!user){
+      return [];
+    }
+    const blogsOfFollwingUser = blogs.filter((blog)=>
+      user.following.includes(blog.userId._id)
+    );
+    return blogsOfFollwingUser;
+  }
   return (
     <div>
       <div className="p-3 d-none d-md-block">Home</div>
@@ -70,11 +83,11 @@ const BlogBar = ({ element }) => {
       <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3">
         <Tab eventKey="Explore" title="Explore">
           <div className="mb-3 ">
-            <BlogRAndC />
+            <BlogRAndC blogs={blogs}/>
           </div>
         </Tab>
         <Tab eventKey="Following" title="Following">
-          Tab content for Profile
+           <BlogRAndC blogs={filterFollowingBlogs()}/>
         </Tab>
       </Tabs>
       <div>

@@ -1,11 +1,8 @@
 import React, { useEffect,useState ,useRef} from 'react'
 import BlogCreate from './BlogCreate';
 import BlogCard from './BlogCard';
-import {useSelector } from 'react-redux';
-import { selectData } from '../../../store/slices/BlogSlice';
 
-const BlogRAndC = () => {
-  const blogs = useSelector(selectData);
+const BlogRAndC = ({blogs}) => {
   return (
     <div>
       <div className='mb-3 blog_create'>
