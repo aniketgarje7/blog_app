@@ -1,4 +1,4 @@
-import React,{useState,useRef} from "react";
+import React,{useState,useRef, useEffect} from "react";
 import Card from "react-bootstrap/Card";
 import {AiFillLike,AiFillDelete,AiFillEdit} from 'react-icons/ai';
 import {BsFillReplyFill} from 'react-icons/bs';
@@ -15,12 +15,7 @@ const BlogCard = ({blog}) => {
   const [showDelete,setShowDelete] = useState(false);
   const [cLength,setCLength] = useState(blog?.comments.length);
   const user = useSelector(selectUser);
-  const [like,setLike] = useState(()=>{
-    if(blog?.likes.includes(user?._id)){
-      return true;
-    }
-    return false;
-  });
+  const [like,setLike] = useState(false);
   const likeRef = useRef(null);
   const [openCommentBar,setOpenCommentBar] = useState(false);
   const dispatch = useDispatch();
@@ -43,6 +38,14 @@ const BlogCard = ({blog}) => {
     });
   }
  
+  useEffect(()=>{
+      if(blog?.likes.includes(user?._id)){
+        setLike(true)
+      }
+      else{
+      setLike(false);
+      }
+  },[blog,user])
   return (
     <div className="mb-2" >
       <Card>
