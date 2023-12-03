@@ -35,10 +35,10 @@ const SignIn = ({ setAuthToggle }) => {
       });
   };
   useEffect(() => {
-    if (user && isLoggedIn) {
+    if (isLoggedIn) {
       navigate("/");
     }
-  }, [user, isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate]);
   return (
     <Form onSubmit={handleSubmit}>
       <FloatingLabel controlId="floatingInput" label="Email address/Username" className="mb-3 ">

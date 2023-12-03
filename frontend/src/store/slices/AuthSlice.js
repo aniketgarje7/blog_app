@@ -41,8 +41,7 @@ export const logIn = (payload) => (dispatch) => {
         response.data?
         (()=>{
         const token = response.data.token;
-        localStorage.setItem('ba_token',token);
-        dispatch(setUser(response.data))   
+        localStorage.setItem('ba_token',token);   
         dispatch(setSuccess(response.data))
         })():
         dispatch(setError(response.error));
