@@ -64,7 +64,7 @@ export const getComments = (payload)=>(dispatch)=>{
         dispatch(setData(response.data))
         :
         dispatch(setError(response.message));
-        return response.data && response.data.length>0?true:false;
+        return response.data && response.data.length>4?true:false;
       },(error)=>{
         dispatch(setError(error.message));
         console.log(error,'error');

@@ -19,6 +19,7 @@ const CommentBar = ({ blogId, cLength, setCLength }) => {
   const handleComments = () => {
     if (seeComments) {
       setSeeComments(false);
+      setPageNumber(0);
       return;
     }
     if(isNoCommentData.current){
