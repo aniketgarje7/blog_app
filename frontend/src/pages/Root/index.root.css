@@ -62,7 +62,7 @@
 .menubar_items li {
   padding: 10px 0px !important;
 }
-.offcanvas_menubar {
+.offcanvas_menubar_body {
   padding: 10px 10px !important;
 }
 .offcanvas-md.offcanvas-start {
@@ -159,6 +159,16 @@
 }
 .blog_tabs li button:hover{
   color: #ffffff;
+}
+.offcanvas_menubar {
+  .offcanvas-body{
+    background-color: var(--dark_three);
+    color: var(--blog_five);
+  }
+  .offcanvas-header{
+    background-color: var(--dark_three);
+    color: var(--blog_five);
+  }
 }
 /* media querys */
 @media (min-width: 768px) {

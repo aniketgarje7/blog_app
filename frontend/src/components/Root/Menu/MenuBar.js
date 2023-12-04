@@ -26,11 +26,11 @@ const MenuBar = () => {
         <AiOutlineMenu />
       </Button>
 
-      <Offcanvas show={show} onHide={handleClose} responsive="md">
+      <Offcanvas show={show} onHide={handleClose} responsive="md" className='offcanvas_menubar'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body className="offcanvas_menubar">
+        <Offcanvas.Body className="offcanvas_menubar_body">
           <div className="menubar_items">
             <div>
               <img src={image} alt="logo" width={30} height={30} className="menubar_logo_image" />
