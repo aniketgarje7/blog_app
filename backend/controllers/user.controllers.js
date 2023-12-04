@@ -11,6 +11,7 @@ const {
   fetchUsersByQuery,
   followUserById,
   checkUserExist,
+  unFollowUserById,
 } = require("../repository/user.repository");
 const SALTROUND = Number(process.env.SALTROUND);
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -199,4 +200,40 @@ const followUser = async (req, res) => {
     message: "seccessfully followed User.",
   });
 };
-module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser };
+
+const unFollowUser = async (req, res) => {
+  const { unFollowUserId } = req.body;
+  const { userId } = req.locals;
+  const userExist = await checkUserExist(unFollowUserId);
+  if (userExist.error) {
+    return res.status(400).send({
+      status: 400,
+      message: "database error",
+      data: false,
+      error: userExist.error,
+    });
+  } else if (!userExist.data) {
+    return res.status(400).send({
+      status: 400,
+      message: "User does not exist",
+      data: false,
+      error: { message: "User does not exist." },
+    });
+  }
+  const response = await unFollowUserById(unFollowUserId, userId);
+  if (response.error) {
+    return res.status(400).send({
+      status: 400,
+      data: false,
+      error: response.error,
+      message: "database error.",
+    });
+  }
+  return res.status(200).send({
+    status: 200,
+    data: response.data,
+    error: false,
+    message: "seccessfully unfollowed User.",
+  });
+};
+module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser,unFollowUser };

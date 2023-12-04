@@ -89,6 +89,24 @@ const followUserById = async (followUserId, userId) => {
   }
 };
 
+const unFollowUserById = async (unFollowUserId, userId) => {
+  try {
+    // remove from followers
+    const user = await User.findById(unFollowUserId);
+    const index = user.followers.indexOf(userId);
+    user.followers.splice(index,1);
+    await user.save();
+    // remove from following
+    const user2 = await User.findById(userId);
+    const index2 = user2.following.indexOf(unFollowUserId);
+    user2.following.splice(index2,1);
+    await user2.save();
+    return { data: true, error: null };
+  } catch (error) {
+    console.log(error.message, "error in unFollowUserById");
+    return { data: null, error: error };
+  }
+};
 const checkUserExist = async (id) => {
   try {
     const userExist = await User.exists({ _id: id });
@@ -107,4 +125,5 @@ module.exports = {
   fetchUsersByQuery,
   checkUserExist,
   followUserById,
+  unFollowUserById,
 };
