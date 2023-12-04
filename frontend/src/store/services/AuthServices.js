@@ -4,7 +4,6 @@ export const authService = {
   logIn,
   signUp,
   getUser,
-  followUser,
   getUsersByQuery
 };
 const header = {
@@ -72,19 +71,3 @@ async function getUsersByQuery(data) {
       console.log(e, "error in getUsersByQuery ");
     });
 };
-
-async function followUser(data) {
-  const requestOptions = {
-    method: "PUT",
-    headers: AuthHeader(),
-    body: JSON.stringify(data),
-  };
-  return fetch(`${process.env.REACT_APP_API}user/follow-user`, requestOptions)
-    .then((res) => res.json())
-    .then((response) => {
-      return response;
-    })
-    .catch((e) => {
-      console.log(e, "error in follow user");
-    });
-}

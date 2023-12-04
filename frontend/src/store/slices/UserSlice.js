@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 import { authService } from "../services/AuthServices";
+import { userService } from "../services/UserService";
 
 const userSlice = createSlice({
     name:'user',
@@ -61,7 +62,7 @@ export const getUserWhotoFollow = () => (dispatch) => {
     );
 };
 export const followUser = (payload) => (dispatch) => {
-    return authService.followUser(payload).then((response) => {
+    return userService.followUser(payload).then((response) => {
         response.data?
         dispatch(setSuccess(response.message)):
         dispatch(setError(response.error));
@@ -73,6 +74,18 @@ export const followUser = (payload) => (dispatch) => {
     );
 };
 
+export const unFollowUser = (payload) => (dispatch) => {
+    return userService.unFollowUser(payload).then((response) => {
+        response.data?
+        dispatch(setSuccess(response.message)):
+        dispatch(setError(response.error));
+        return response.data?true:false;
+    }, (error) => {
+        console.log(error,'error unFollowUser');
+        return false;
+    }
+    );
+};
 export const seletcSearchData = (state)=>state.user.searchData;
 export  const selectIsLoading = (state)=>state.user.isLoading;
 export const selectWhotoFollowData = (state)=>state.user.whoToFollowData;
