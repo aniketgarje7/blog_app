@@ -9,6 +9,7 @@ export const blogSlice = createSlice({
         error:null,
         success:null,
         isNoData:false,
+        aiContent:null,
     },
     reducers:{
         setData:(state,action)=>{
@@ -43,11 +44,14 @@ export const blogSlice = createSlice({
             const id = action.payload._id;
             const index = state.data.findIndex((obj)=>obj._id===id);
             state.data = state.data.filter((_,i)=>Number(index)!==Number(i));
+        },
+        setAicontent:(state,action)=>{
+            state.aiContent = action.payload;
         }
     }
 });
 
-export const {setData,unSetData,setError,setSuccess,setDataById,setIsNoData,setDataByBlog,setDataByDelete} = blogSlice.actions;
+export const {setData,unSetData,setError,setSuccess,setDataById,setIsNoData,setDataByBlog,setDataByDelete,setAicontent} = blogSlice.actions;
 
 export const createBlog = (payload)=>(dispatch)=>{
     return blogService.createBlog(payload).then((response)=>{
@@ -123,8 +127,22 @@ export const likeBlog = (payload)=>(dispatch)=>{
         return false;
     })
 };
+
+export const rewriteTextByAI = (payload)=>(dispatch)=>{
+    return blogService.rewriteTextByAI(payload).then((response)=>{
+        response?.data?
+        dispatch(setAicontent(response.data.message?.content)):
+        dispatch(setError(response.message));
+        return response.data?true:false;
+    },(error)=>{
+        dispatch(setError(error.message));
+        console.log(error,'error');
+        return false;
+    })
+};
 export const selectData = (state) => state.blog.data;
 export const selectError = (state) =>state.blog.error;
 export const selectSuccess = (state)=>state.blog.success;
 export const selectIsNoData = (state)=>state.blog.isNoData;
+export const selectAiContent = (state)=>state.blog.aiContent;
 export default blogSlice.reducer;

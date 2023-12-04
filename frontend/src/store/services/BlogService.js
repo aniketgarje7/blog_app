@@ -6,6 +6,7 @@ export const blogService = {
     editBlog,
     deleteBlog,
     likeBlog,
+    rewriteTextByAI,
 };
 
 async function createBlog(data){
@@ -84,5 +85,21 @@ async function likeBlog(data){
         })
         .catch(e=>{
             console.log(e,'error in like service');
+        });
+};
+
+async function rewriteTextByAI(data){
+    const requestOptions = {
+        method: "POST",
+        headers: AuthHeader(),
+        body: JSON.stringify(data),
+    };
+    return fetch(`${process.env.REACT_APP_API}blog/refactor`, requestOptions)
+        .then((res)=>res.json())
+        .then((response) => {
+            return response;
+        })
+        .catch(e=>{
+            console.log(e,'error in refactorAicontent service');
         });
 };
