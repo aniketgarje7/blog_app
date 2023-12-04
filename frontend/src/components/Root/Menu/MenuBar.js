@@ -11,6 +11,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/slices/AuthSlice";
 import LogoutModel from "./LogoutModel";
+import MenuFooter from "./MenuFooter";
 
 const MenuBar = () => {
   const [show, setShow] = useState(false);
@@ -41,7 +42,7 @@ const MenuBar = () => {
               </span>
               <span>Profile</span>
             </li>
-            <li>
+            <li className="d-block d-md-none">
               <span className="menubar_icons">
                 <AiOutlineSearch />
               </span>
@@ -66,9 +67,16 @@ const MenuBar = () => {
               <span className="cursor-pointer">LogOut</span>
             </li>
           </div>
+          <div className="d-block d-md-none">
+          <MenuFooter/>
+          </div>
+          
         </Offcanvas.Body>
       </Offcanvas>
       <LogoutModel show={showLogoutModel} setShow={setShowLogoutModel}/>
+      <div className="d-none d-md-block">
+      <MenuFooter /> 
+      </div>
     </div>
   );
 };

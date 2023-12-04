@@ -77,9 +77,6 @@ const BlogBar = ({ element }) => {
   return (
     <div>
       <div className="p-3 d-none d-md-block">Home</div>
-      <div className="py-3 d-block d-md-none">
-        <MenuBar />
-      </div>
       <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3 blog_tabs">
         <Tab eventKey="Explore" title="Explore">
           <div className="mb-3 ">

@@ -5,11 +5,11 @@ import SearchBar from "../../components/Root/Search/SearchBar";
 import "./index.root.css";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../store/slices/AuthSlice";
-import MenuFooter from "../../components/Root/Menu/MenuFooter";
 
 const Root = () => {
   const dispatch = useDispatch();
   const [element, setElement] = useState();
+  const [menuActiveItem,setMenuActiveItem] = useState('Home')
   useEffect(() => {
     dispatch(getUser());
     const ele = document.querySelector("div#scroll_bar");
@@ -19,9 +19,8 @@ const Root = () => {
   return (
     <div className="root_bg">
       <div className="container root_page">
-        <div className="menu_bar d-none d-md-block">
+        <div className="menu_bar">
           <MenuBar />
-          <MenuFooter />
         </div>
         <div className="blog_bar" id="scroll_bar">
           <BlogBar element={element} />

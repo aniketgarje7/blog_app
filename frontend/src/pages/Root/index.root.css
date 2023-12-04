@@ -47,11 +47,7 @@
   padding: 10px 10px;
 }
 .menu_bar {
-  height: inherit;
-  max-width: 200px;
-  min-height: 400px;
   position: relative;
-  overflow: hidden;
 }
 .menubar_wrap {
   height: inherit;
@@ -177,8 +173,21 @@
   }
   .menu_bar {
     width: 30%;
+    height: inherit;
+    max-width: 200px;
+    min-height: 400px;
+    overflow: hidden;
   }
 }
-
+@media (max-width: 768px) {
+  .root_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    .menu_bar{
+      padding: 13px 0px;
+    }
+  }
+}
 @media (min-width: 576px) {
 }
