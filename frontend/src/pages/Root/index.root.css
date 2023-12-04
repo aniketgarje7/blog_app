@@ -150,6 +150,10 @@
 .no_user{
   padding: 2px 12px;
 }
+.textarea_blog{
+    max-height: 300px;
+    overflow-x: hidden !important;
+}
 /* media querys */
 @media (min-width: 768px) {
   .blog_bar {
