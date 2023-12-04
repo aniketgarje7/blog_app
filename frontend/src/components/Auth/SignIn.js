@@ -18,9 +18,7 @@ const SignIn = ({ setAuthToggle }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = { loginId: email, password: password };
+  const loginUser = (data) => {
     setIsLoading(true);
     dispatch(logIn(data))
       .then((res) => {
@@ -33,6 +31,15 @@ const SignIn = ({ setAuthToggle }) => {
         console.log(e, "error");
         setIsLoading(false);
       });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = { loginId: email, password: password };
+    loginUser(data);
+  };
+  const handleDemo = () => {
+    const data = { loginId: "test", password: "testtest" };
+    loginUser(data);
   };
   useEffect(() => {
     if (isLoggedIn) {
@@ -59,6 +66,12 @@ const SignIn = ({ setAuthToggle }) => {
           {" "}
           click here
         </span>
+      </div>
+      <div className="form_change_data">
+        <span className="link-primary click_link" onClick={handleDemo}>
+          click here  {" "}
+        </span>
+        to see demo
       </div>
     </Form>
   );
