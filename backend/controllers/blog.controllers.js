@@ -1,5 +1,7 @@
 const Joi = require("joi");
 const { saveToDB, fetchBlogs, fetchBlogById, updateBlogById, deleteBlogById, likeBlogById } = require("../repository/blog.repository");
+const { getAIResponse } = require("../utils/chatgptApi");
+const {rewrite}  = require('../utils/chatgptPrompts');
 
 const createBlog = async (req, res) => {
   const schema = Joi.object({
@@ -217,4 +219,37 @@ const likeBlog = async (req, res) => {
     });
   }
 };
-module.exports = { createBlog, getAllBlogs, updateBlog, deleteBlog, likeBlog };
+
+const refactorContent = async (req, res) => {
+  const { content } = req.body;
+  const schema = Joi.object({
+    content: Joi.string().required().min(20).max(1000),
+  });
+  const isValid = schema.validate(req.body);
+  if (isValid.error) {
+    return res.status(400).send({
+      status: 400,
+      message: isValid.error.details[0].message,
+      error: isValid.error.details[0],
+      data: false,
+    });
+  }
+  const refactorContent =`${rewrite}:${content}`;
+  const response = await getAIResponse(refactorContent);
+  if (response.error) {
+    return res.status(400).send({
+      status: 400,
+      message: "could not get AI response.",
+      error: response.error,
+      data: false,
+    });
+  }
+  return res.status(200).send({
+      status: 200,
+      message: "Successfully got AI response.",
+      data: response.data,
+      error: false,
+    });
+  
+};
+module.exports = { createBlog, getAllBlogs, updateBlog, deleteBlog, likeBlog,refactorContent };
