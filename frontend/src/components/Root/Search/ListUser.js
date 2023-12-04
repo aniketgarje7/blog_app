@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import {followUser, unFollowUser} from '../../../store/slices/UserSlice'
+import { selectUser } from '../../../store/slices/AuthSlice';
 
-const ListUser = ({item,index,user}) => {
+const ListUser = ({item}) => {
     const [isLoading,setIsLoading] = useState(false);
     const [isFollowing,setIsFollowing] = useState(false);
+    const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const handleFollowUser = ()=>{
@@ -30,7 +32,7 @@ const ListUser = ({item,index,user}) => {
 
     useEffect(()=>{
       setIsFollowing(user?.following.includes(item._id)?true:false)
-    },[user])
+    },[user,item])
   return (
     <ListGroup.Item>
     <span>@{item.username}</span>
