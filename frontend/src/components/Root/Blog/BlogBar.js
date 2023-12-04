@@ -11,6 +11,8 @@ import { selectUser } from "../../../store/slices/AuthSlice";
 const BlogBar = ({ element }) => {
   const userCall = useRef(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [textBody, setTextBody] = useState("");
   const pageNumber = useRef(0);
   const didApiCall = useRef(false);
   const isNoData = useSelector(selectIsNoData);
@@ -73,18 +75,19 @@ const BlogBar = ({ element }) => {
       user.following.includes(blog.userId._id)
     );
     return blogsOfFollwingUser;
-  }
+  };
+  const createBlogData = {title,setTitle,textBody,setTextBody}
   return (
     <div>
       <div className="p-3 d-none d-md-block">Home</div>
       <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3 blog_tabs">
         <Tab eventKey="Explore" title="Explore">
           <div className="mb-3 ">
-            <BlogRAndC blogs={blogs}/>
+            <BlogRAndC blogs={blogs} createBlogData={createBlogData}/>
           </div>
         </Tab>
         <Tab eventKey="Following" title="Following">
-           <BlogRAndC blogs={filterFollowingBlogs()}/>
+           <BlogRAndC blogs={filterFollowingBlogs()} createBlogData={createBlogData}/>
         </Tab>
       </Tabs>
       <div>

@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog, getBlogs, rewriteTextByAI, selectAiContent, setAicontent } from "../../../store/slices/BlogSlice";
 import autosize from "autosize";
 
-const BlogCreate = () => {
-  const [title, setTitle] = useState("");
-  const [textBody, setTextBody] = useState("");
+const BlogCreate = ({createBlogData}) => {
+  const {title,setTitle,textBody,setTextBody} = createBlogData;
   const [dummyTextBody, setDummyTextBody] = useState("");
   const [toggleContent, setToggleContent] = useState("Original Content");
   const [isLoading, setIsLoading] = useState(false);
