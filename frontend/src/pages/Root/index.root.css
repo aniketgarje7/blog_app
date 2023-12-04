@@ -154,6 +154,12 @@
     max-height: 300px;
     overflow-x: hidden !important;
 }
+.blog_tabs li button{
+  color: #ffffff;
+}
+.blog_tabs li button:hover{
+  color: #ffffff;
+}
 /* media querys */
 @media (min-width: 768px) {
   .blog_bar {

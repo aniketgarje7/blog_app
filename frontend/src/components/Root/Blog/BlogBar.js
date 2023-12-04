@@ -80,7 +80,7 @@ const BlogBar = ({ element }) => {
       <div className="py-3 d-block d-md-none">
         <MenuBar />
       </div>
-      <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3">
+      <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3 blog_tabs">
         <Tab eventKey="Explore" title="Explore">
           <div className="mb-3 ">
             <BlogRAndC blogs={blogs}/>
