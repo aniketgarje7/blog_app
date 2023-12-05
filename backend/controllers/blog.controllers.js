@@ -111,7 +111,7 @@ const getAllBlogs = async (req, res) => {
     return res.status(200).send({
       status: 200,
       message: "Fetched all blogs",
-      data: blogData.data.reverse(),
+      data: blogData.data,
       error: false,
     });
   }

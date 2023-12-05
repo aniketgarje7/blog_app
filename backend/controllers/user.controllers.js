@@ -12,6 +12,7 @@ const {
   followUserById,
   checkUserExist,
   unFollowUserById,
+  fetchBlogsByUserId,
 } = require("../repository/user.repository");
 const SALTROUND = Number(process.env.SALTROUND);
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -236,4 +237,37 @@ const unFollowUser = async (req, res) => {
     message: "seccessfully unfollowed User.",
   });
 };
-module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser,unFollowUser };
+const getBlogsByUserId = async (req, res) => {
+  const {userId} = req.params;
+  const schema = Joi.object({
+    userId: Joi.string().required(),
+  });
+  const isValid = schema.validate(req.params);
+  if (isValid.error) {
+    return res.status(400).send({
+      status: 400,
+      message: "Data is invalid",
+      data: false,
+      error: isValid?.error?.details[0],
+    });
+  }
+  const page = Number(req.query.page) || 0;
+  const LIMIT = 10;
+  const blogData = await fetchBlogsByUserId(page, LIMIT,userId);
+  if (blogData.error) {
+    return res.status(400).send({
+      status: 400,
+      message: "error fetching blogs from database",
+      error: (await blogData).error,
+      data: false,
+    });
+  } else {
+    return res.status(200).send({
+      status: 200,
+      message: "Fetched all blogs",
+      data: blogData.data,
+      error: false,
+    });
+  }
+};
+module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser,unFollowUser,getBlogsByUserId };

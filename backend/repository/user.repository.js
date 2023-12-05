@@ -1,3 +1,4 @@
+const Blog = require("../models/Blog");
 const User = require("../models/User");
 
 const CheckUsernameAndEmail = async (username, email) => {
@@ -116,6 +117,20 @@ const checkUserExist = async (id) => {
     return { data: null, error: error };
   }
 };
+const fetchBlogsByUserId = async (page, LIMIT,userId) => {
+  try {
+    const data = await Blog.find({userId})
+      .sort({created_at:-1})
+      .populate({ path: "userId", select: ["name", "username"] })
+      .skip(page * LIMIT)
+      .limit(LIMIT);
+      
+    return { data: data, error: null };
+  } catch (error) {
+    console.log("fetchBlogs error", error);
+    return { data: null, error: error };
+  }
+};
 module.exports = {
   CheckUsernameAndEmail,
   CreateUser,
@@ -126,4 +141,5 @@ module.exports = {
   checkUserExist,
   followUserById,
   unFollowUserById,
+  fetchBlogsByUserId,
 };
