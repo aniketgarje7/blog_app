@@ -119,13 +119,13 @@ const checkUserExist = async (id) => {
 };
 const fetchBlogsByUserId = async (page, LIMIT,userId) => {
   try {
-    const data = await Blog.find({userId})
+    const blogs = await Blog.find({userId})
       .sort({created_at:-1})
       .populate({ path: "userId", select: ["name", "username"] })
       .skip(page * LIMIT)
       .limit(LIMIT);
       
-    return { data: data, error: null };
+    return { data: blogs, error: null };
   } catch (error) {
     console.log("fetchBlogs error", error);
     return { data: null, error: error };

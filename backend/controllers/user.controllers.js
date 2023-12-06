@@ -127,13 +127,11 @@ const logInUser = async (req, res) => {
   };
   const token = jwt.sign(payload, JWT_SECRET);
 
-  return res
-    .status(200)
-    .send({
-      status: 200,
-      message: "User logged in succesfully.",
-      data: { message: "User logged in succesfully.", token: token, name: name, username: username },
-    });
+  return res.status(200).send({
+    status: 200,
+    message: "User logged in succesfully.",
+    data: { message: "User logged in succesfully.", token: token, name: name, username: username },
+  });
 };
 
 const getUser = async (req, res) => {
@@ -237,10 +235,11 @@ const unFollowUser = async (req, res) => {
     message: "seccessfully unfollowed User.",
   });
 };
-const getBlogsByUserId = async (req, res) => {
-  const {userId} = req.params;
+
+const getUserDataAndBlogData = async (req, res) => {
+  const { username } = req.params;
   const schema = Joi.object({
-    userId: Joi.string().required(),
+    username: Joi.string().required(),
   });
   const isValid = schema.validate(req.params);
   if (isValid.error) {
@@ -251,6 +250,24 @@ const getBlogsByUserId = async (req, res) => {
       error: isValid?.error?.details[0],
     });
   }
+  const { data, error } = await getDataFromUsername(username);
+  if (error) {
+    return res.status(400).send({
+      status: 400,
+      message: "Error fetching User",
+      data: false,
+      error: error,
+    });
+  } else if (data.length === 0) {
+    return res.status(400).send({
+      status: 400,
+      message: "User does not exist.",
+      data: false,
+      error: { message: "User does not exist." },
+    });
+  }
+  const user = data[0];
+  const userId = user._id;
   const page = Number(req.query.page) || 0;
   const LIMIT = 10;
   const blogData = await fetchBlogsByUserId(page, LIMIT,userId);
@@ -258,16 +275,18 @@ const getBlogsByUserId = async (req, res) => {
     return res.status(400).send({
       status: 400,
       message: "error fetching blogs from database",
-      error: (await blogData).error,
+      error: blogData.error,
       data: false,
     });
   } else {
+    const { _id, name, username, email, followers, following, created_at } = user;
+    const requiredUserData = { _id, name, username, email, followers: followers?.length, following: following?.length, created_at };
     return res.status(200).send({
       status: 200,
       message: "Fetched all blogs",
-      data: blogData.data,
+      data: { user: requiredUserData, blogs: blogData.data },
       error: false,
     });
   }
 };
-module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser,unFollowUser,getBlogsByUserId };
+module.exports = { registerUser, logInUser, getUser, getUsersByQuery, followUser, unFollowUser, getUserDataAndBlogData };
