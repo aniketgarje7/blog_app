@@ -105,7 +105,7 @@ const BlogCreate = ({createBlogData}) => {
             </Button>
           )}
 
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} className="m-1">
             {isLoading ? <ButtonLoader /> : "Post"}
           </Button>
         </div>

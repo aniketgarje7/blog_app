@@ -80,7 +80,7 @@ const BlogBar = ({ element }) => {
   return (
     <div>
       <div className="p-3 d-none d-md-block">Home</div>
-      <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3 blog_tabs">
+      <Tabs defaultActiveKey="Explore" id="uncontrolled-tab-example" className="mb-3 p-1 blog_tabs">
         <Tab eventKey="Explore" title="Explore">
           <div className="mb-3 ">
             <BlogRAndC blogs={blogs} createBlogData={createBlogData}/>

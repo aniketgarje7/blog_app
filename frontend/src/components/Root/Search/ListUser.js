@@ -4,13 +4,14 @@ import Button from "react-bootstrap/Button";
 import {useDispatch,useSelector} from 'react-redux';
 import {followUser, unFollowUser} from '../../../store/slices/UserSlice'
 import { selectUser } from '../../../store/slices/AuthSlice';
+import {useNavigate } from 'react-router-dom';
 
 const ListUser = ({item}) => {
     const [isLoading,setIsLoading] = useState(false);
     const [isFollowing,setIsFollowing] = useState(false);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const handleFollowUser = ()=>{
         if(isFollowing){
           setIsLoading(true);
@@ -35,7 +36,7 @@ const ListUser = ({item}) => {
     },[user,item])
   return (
     <ListGroup.Item>
-    <span>@{item.username}</span>
+    <span className='cursor-pointer' onClick={()=>navigate(`/profile/${item.username}`)}>@{item.username}</span>
     <Button variant={isFollowing?'secondary':'info'} className="follow_button" onClick={handleFollowUser} disabled={isLoading}>
       {isFollowing?'Following':'Follow'}
     </Button>

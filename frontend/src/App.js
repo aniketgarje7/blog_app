@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./store/slices/AuthSlice";
 import ProtectedRoute from "./components/Elements/ProtectedRoute";
 import AuthRoute from "./components/Elements/AuthRoute";
+import Profile from "./components/Root/Profile/Profile";
 
 function App() {
   const user = useSelector(selectUser);
@@ -16,7 +17,16 @@ function App() {
           <Root />
         </ProtectedRoute>
       ),
+      children:[
+        {
+          path:'/profile/:username',
+          element:(
+              <Profile/>
+          )
+        },
+      ]
     },
+  
     {
       path: "/auth",
       element: (

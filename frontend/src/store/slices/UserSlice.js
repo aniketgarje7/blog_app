@@ -11,6 +11,9 @@ const userSlice = createSlice({
         error:null,
         success:null,
         whoToFollowData:[],
+        userBlogs:[],
+        profileUser:null,
+        menuActiveItem:'Home'
     },
     reducers:{
         setSearchData:(state,action)=>{
@@ -30,11 +33,24 @@ const userSlice = createSlice({
         },
         setWhoToFollowData:(state,action)=>{
             state.whoToFollowData = action.payload;
+        },
+        setUsersBlogs:(state,action)=>{
+            state.userBlogs = action.payload;
+        },
+        setProfileUser:(state,action)=>{
+            state.profileUser = action.payload;
+        },
+        setMenuActiveItem:(state,action)=>{
+            state.menuActiveItem = action.payload;
+        },
+        setBlogsAndUser:(state,action)=>{
+            state.userBlogs = action.payload?.blogs;
+            state.profileUser = action.payload?.user;
         }
     }
 });
 
-export const {setSearchData,setError,setSuccess,setWhoToFollowData} = userSlice.actions;
+export const {setSearchData,setError,setSuccess,setWhoToFollowData,setUsersBlogs,setProfileUser,setMenuActiveItem,setBlogsAndUser} = userSlice.actions;
 
 export const getUsersByQuery = (payload) => (dispatch) => {
     return authService.getUsersByQuery(payload).then((response) => {
@@ -86,8 +102,34 @@ export const unFollowUser = (payload) => (dispatch) => {
     }
     );
 };
+export const getBlogsByUsername = (payload) => (dispatch) => {
+    return userService.getBlogsByUsername(payload).then((response) => {
+        response.data?
+        dispatch(setBlogsAndUser(response.data)):
+        dispatch(setError(response.error));
+        return response.data?true:false;
+    }, (error) => {
+        console.log(error,'error getBlogsByUsername');
+        return false;
+    }
+    );
+};
+export const getUserByUsername = (payload) => (dispatch) => {
+    return userService.getUserByUsername(payload).then((response) => {
+        response.data?
+        dispatch(setProfileUser(response.data)):
+        dispatch(setError(response.error));
+        return response.data?true:false;
+    }, (error) => {
+        console.log(error,'error getUserByUsername');
+        return false;
+    }
+    );
+};
 export const seletcSearchData = (state)=>state.user.searchData;
 export  const selectIsLoading = (state)=>state.user.isLoading;
 export const selectWhotoFollowData = (state)=>state.user.whoToFollowData;
-
+export const selectUserBlogs = (state)=>state.user.userBlogs;
+export const selectProfileUser = (state)=>state.user.profileUser;
+export const selectMenuActiveItem = (state)=>state.user.menuActiveItem;
 export default userSlice.reducer;
