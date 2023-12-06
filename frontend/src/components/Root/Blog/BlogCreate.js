@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ButtonLoader from "../../Elements/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog, getBlogs, rewriteTextByAI, selectAiContent, setAicontent } from "../../../store/slices/BlogSlice";
+import { createBlog,rewriteTextByAI, selectAiContent, setAicontent } from "../../../store/slices/BlogSlice";
 import autosize from "autosize";
 
 const BlogCreate = ({createBlogData}) => {

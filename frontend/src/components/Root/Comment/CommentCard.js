@@ -1,7 +1,6 @@
 import React,{useState,useRef} from "react";
 import Card from "react-bootstrap/Card";
-import {AiFillLike,AiFillDelete,AiFillEdit} from 'react-icons/ai';
-import {BsFillReplyFill} from 'react-icons/bs';
+import {AiFillLike} from 'react-icons/ai';
 import { useDispatch,useSelector } from "react-redux";
 import { likeComment } from "../../../store/slices/CommentSlice";
 import { selectUser } from "../../../store/slices/AuthSlice";

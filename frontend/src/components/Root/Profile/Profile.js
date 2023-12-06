@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { IoPerson } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogsByUsername, selectProfileUser, selectUserBlogs, selectWhotoFollowData, seletcSearchData } from "../../../store/slices/UserSlice";
+import { getBlogsByUsername, selectProfileUser, selectUserBlogs,} from "../../../store/slices/UserSlice";
 import BlogCard from "../Blog/BlogCard";
 import ButtonLoader from "../../Elements/ButtonLoader";
 import { selectUser } from "../../../store/slices/AuthSlice";
 import { useParams } from "react-router-dom";
-const Profile = ({params}) => {
+const Profile = () => {
   const [isLoading, setIloading] = useState(false);
   const dispatch = useDispatch();
   const blogs = useSelector(selectUserBlogs);
   const user = useSelector(selectUser);
   const profileUser = useSelector(selectProfileUser);
-  console.log(blogs,'blogs',profileUser,'user')
   const {username} = useParams();
   useEffect(() => {
     if (!user) {

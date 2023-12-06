@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ButtonLoader from "../../Elements/ButtonLoader";
 import {useDispatch} from 'react-redux';
-import {  editBlog, getBlogs } from "../../../store/slices/BlogSlice";
+import {  editBlog} from "../../../store/slices/BlogSlice";
 
 const BlogEdit = ({title,text,blogId,handleClose}) => {
     const [titleEdit, setTitle] = useState(title);

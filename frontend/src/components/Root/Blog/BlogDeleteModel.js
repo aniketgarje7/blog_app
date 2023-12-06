@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ButtonLoader from '../../Elements/ButtonLoader';
 import { useDispatch } from 'react-redux';
-import { deleteBlog, getBlogs } from '../../../store/slices/BlogSlice';
+import { deleteBlog} from '../../../store/slices/BlogSlice';
 
 const BlogDeleteModel = ({show,handleClose,blog}) => {
     const {_id} = blog;

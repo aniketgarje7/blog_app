@@ -5,11 +5,14 @@ import SearchBar from "../../components/Root/Search/SearchBar";
 import "./index.root.css";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../store/slices/AuthSlice";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 const Root = () => {
   const dispatch = useDispatch();
   const [element, setElement] = useState();
   const { pathname } = useLocation();
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 992px)");
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getUser());
     const ele = document.querySelector("div#scroll_bar");
@@ -30,6 +33,13 @@ const Root = () => {
         {pathname.startsWith("/profile") && (
           <div className="profile">
             <Outlet />
+          </div>
+        )}
+        {pathname.startsWith('/search') && (
+          <div>{isSmallDevice?
+          <div className="d-block d-lg-none">
+            <Outlet/>
+          </div>:navigate('/')}
           </div>
         )}
         <div className="d-none d-lg-block search_bar">

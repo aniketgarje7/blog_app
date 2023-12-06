@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import BlogRAndC from "./BlogRAndC";
-import MenuBar from "../Menu/MenuBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, selectIsNoData,selectData} from "../../../store/slices/BlogSlice";
 import ButtonLoader from "../../Elements/ButtonLoader";

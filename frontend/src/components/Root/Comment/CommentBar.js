@@ -1,7 +1,6 @@
 import React, { useState,useRef, useEffect } from "react";
 import CommentCreate from "./CommentCreate";
 import CommentCard from "./CommentCard";
-import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments, selectData } from "../../../store/slices/CommentSlice";
 import ButtonLoader from "../../Elements/ButtonLoader";

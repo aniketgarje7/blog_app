@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  height: 100dvh;
   .menu_bar{
     padding: 13px 0px;
   }
@@ -231,6 +232,7 @@
   padding: 10px 0px;
 }
 /* media querys */
+@media (min-width: 992px) {  }
 @media (min-width: 768px) {
   .blog_bar {
     width: 50%;
@@ -253,9 +255,6 @@
     height: 100dvh;
     min-height: 400px;
   }
-}
-@media (max-width: 768px) {
- 
 }
 @media (min-width: 576px) {
 }

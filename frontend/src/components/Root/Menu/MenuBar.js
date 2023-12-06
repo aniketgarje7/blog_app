@@ -8,7 +8,7 @@ import { IoMdNotificationsOutline,IoMdHome } from "react-icons/io";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import image from "../../../assets/hashImage2.png";
 import { HiOutlineLogout } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/slices/AuthSlice";
 import LogoutModel from "./LogoutModel";
 import MenuFooter from "./MenuFooter";
@@ -23,6 +23,7 @@ const MenuBar = () => {
   const user = useSelector(selectUser)
   const handleChangeMenuItem = (payload)=>{
       navigate(payload);
+      handleClose();
   }
   return (
     <div className="menubar_wrap">
@@ -37,7 +38,7 @@ const MenuBar = () => {
         <Offcanvas.Body className="offcanvas_menubar_body">
           <div className="menubar_items">
             <div>
-              <img src={image} alt="logo" width={30} height={30} className="menubar_logo_image" />
+              <img src={image} alt="logo" width={30} height={30} className="menubar_logo_image cursor-pointer" onClick={()=>handleChangeMenuItem('/')}/>
             </div>
             <li>
               <span className="menubar_icons" onClick={()=>handleChangeMenuItem('/')}>
@@ -52,10 +53,10 @@ const MenuBar = () => {
               <span onClick={()=>handleChangeMenuItem(`/profile/${user.username}`)} className="cursor-pointer">Profile</span>
             </li>
             <li className="d-block d-lg-none">
-              <span className="menubar_icons">
+              <span className="menubar_icons" onClick={()=>handleChangeMenuItem('/search')}>
                 <AiOutlineSearch />
               </span>
-              <span>Search</span>
+              <span onClick={()=>handleChangeMenuItem('/search')} className="cursor-pointer">Search</span>
             </li>
             <li>
               <span className="menubar_icons">
